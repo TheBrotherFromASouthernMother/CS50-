@@ -7,17 +7,14 @@
 
 
 int main (int argc, string argv[]) {
-    
-    
-    int k = atoi(argv[1]);
      
-    int numargs =  argc;
     
-    if (numargs != 2) {
-        printf("error please try again \n");
+    if (argc != 2) {
+        printf("error \n");
         return 1; 
     }
     
+    int k = atoi(argv[1]);
     
     printf("plaintext: ");
     string message = get_string();
@@ -31,15 +28,29 @@ int main (int argc, string argv[]) {
         
         if (islower(message[i]) && message[i] + k < 123 )
             {
-                 crypted = message[i] + k
+                 crypted = message[i] + k;
+                 
+                 
             } else if ( islower(message[i]))
-                {  crypted = message[i] + (k % 26) - 122;
+                {  crypted = ((message[i] - 97) + k)%26 +97;
+                
+                
+                //+ (k % 26) - 122;
                     
-                } else if (isupper(message[i]) && message[i] + k < 91) 
+                
+                }
+                else if (isupper(message[i]) && message[i] + k < 91) 
                     {  crypted = message[i] + k;
                         
-                        } else if (isupper(message[i])) 
-                            {  crypted = message[i] + (k % 26) - 91; }
+                        }
+                        else if (isupper(message[i])) 
+                            {  crypted = ((message[i] -65) + k)%26 +65;
+                            
+                            
+                            
+                            //+ (k % 26) - 91; }
+                            
+                            }
                             
                             else if (isspace(message[i])) {
                                 crypted = message[i];
@@ -47,6 +58,14 @@ int main (int argc, string argv[]) {
                             
                             else if (isxdigit(message[i])) {
                                 crypted = message[i];
+                            }
+                            
+                            else if (ispunct (message[i])) {
+                            crypted = message[i];
+                            }
+            
+                            else if (isblank (message[i])) {
+                            crypted = message[i];
                             }
         
         
