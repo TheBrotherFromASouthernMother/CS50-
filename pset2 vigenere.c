@@ -28,65 +28,47 @@ int main (int argc, string argv[]) {
         char k = (keyword[j]);
         char crypted = 0;
         
-         if(j > strlen(keyword)) {
+         if(j > strlen(keyword) -1) {
                 j = 0;
             }
             
-        
-        
-        if (isalpha(keyword[j])) {
-        
-           
-            
-         
        
         
-        if (islower(message[i]) && message[i] + k < 123 )
-            {
-                 crypted = message[i] + k;
-                 
-                 
-            } else if ( islower(message[i] ))
+         if ( islower(message[i] ))
                
-                {  k = tolower(keyword[j%26]) -97;
+                {  k = tolower(keyword[j]) -97;
                     
-                    crypted = ((message[i] - 97) + k)%26 +97;
-                
-                
-                    
+                crypted = ((message[i] - 97) + k)%26 +97;
                 
                 }
-                else if (isupper(message[i]) && message[i] + k < 91) {  
-                    crypted = message[i] + k;
-                        
-                        }
-                        else if (isupper(message[i])) 
+              
+          else if (isupper(message[i])) 
                          
-                            {  k = tolower(keyword[j%26])-97;
+                  {  k = tolower(keyword[j])-97;
                                 
-                                crypted = ((message[i] -65) + k)%26 +65;
+                    crypted = ((message[i] -65) + k)%26 +65;
                             
                             
-                            }
+                  }
                             
-                            else if (isspace(message[i])) {
-                                crypted = message[i];
-                            }
+                  else if (isspace(message[i])) {
+                  crypted = message[i];
+                  }
                             
-                            else if (isxdigit(message[i])) {
-                                crypted = message[i];
-                            }
+                  else if (isxdigit(message[i])) {
+                  crypted = message[i];
+                  }
                             
-                            else if (ispunct (message[i])) {
-                            crypted = message[i];
-                            }
+                  else if (ispunct (message[i])) {
+                  crypted = message[i];
+                  }
             
-                            else if (isblank (message[i])) {
-                            crypted = message[i];
-                            }
+                  else if (isblank (message[i])) {
+                  crypted = message[i];
+                  }
         
         
-        }
+        
     
         
         printf("%c", crypted);
