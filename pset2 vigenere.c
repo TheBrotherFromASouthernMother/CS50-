@@ -14,7 +14,11 @@ int main (int argc, string argv[]) {
         return 1; 
     }
     
+    
     string keyword = argv[1];
+    
+   
+    
     
     
     printf("plaintext: ");
@@ -51,7 +55,10 @@ int main (int argc, string argv[]) {
                             
                   }
                             
+        
                   else if (isspace(message[i])) {
+                      
+                      j = j-1;
                 
                   
                   crypted = message[i];
@@ -62,6 +69,7 @@ int main (int argc, string argv[]) {
                   }
                             
                   else if (ispunct (message[i])) {
+                      j = j-1;
                 
                   crypted = message[i];
                   }
@@ -73,10 +81,11 @@ int main (int argc, string argv[]) {
         
         
     //xoqmd, rby gflkp!" using "baz" as keyword
+    //rjects Hax0r2"
         
         printf("%c", crypted);
         
-        
+    
     }
     
     printf("\n"); 
