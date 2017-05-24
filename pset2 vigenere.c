@@ -52,6 +52,8 @@ int main (int argc, string argv[]) {
                   }
                             
                   else if (isspace(message[i])) {
+                
+                  
                   crypted = message[i];
                   }
                             
@@ -60,6 +62,7 @@ int main (int argc, string argv[]) {
                   }
                             
                   else if (ispunct (message[i])) {
+                
                   crypted = message[i];
                   }
             
@@ -69,7 +72,7 @@ int main (int argc, string argv[]) {
         
         
         
-    
+    //xoqmd, rby gflkp!" using "baz" as keyword
         
         printf("%c", crypted);
         
