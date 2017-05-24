@@ -14,17 +14,20 @@ int main (int argc, string argv[]) {
         return 1; 
     }
     
-    
     string keyword = argv[1];
+     
+   for (int x = 0; x <strlen(keyword); x ++) {
+        
+        if (!isalpha(keyword[x])) {
+            printf("expeted only alphabetical numbers\n");
+         return 1;
     
-   
-    
-    
-    
+        }
+    }
+
     printf("plaintext: ");
     string message = get_string();
     printf("ciphertext: ");
-    
     
     
     for (int i = 0, j = 0; i < strlen(message); i++, j++) {
@@ -36,9 +39,8 @@ int main (int argc, string argv[]) {
                 j = 0;
             }
             
-       
         
-         if ( islower(message[i] ))
+         if ( islower(message[i]))
                
                 {  k = tolower(keyword[j]) -97;
                     
@@ -46,21 +48,14 @@ int main (int argc, string argv[]) {
                 
                 }
               
-          else if (isupper(message[i])) 
-                         
-                  {  k = tolower(keyword[j])-97;
-                                
-                    crypted = ((message[i] -65) + k)%26 +65;
-                            
-                            
-                  }
-                            
+          else if (isupper(message[i]))    
+                  { 
+               k = tolower(keyword[j])-97;                 
+               crypted = ((message[i] -65) + k)%26 +65;       
+                  }   
         
                   else if (isspace(message[i])) {
-                      
-                      j = j-1;
-                
-                  
+                  j = j-1;
                   crypted = message[i];
                   }
                             
@@ -85,7 +80,6 @@ int main (int argc, string argv[]) {
         
         printf("%c", crypted);
         
-    
     }
     
     printf("\n"); 
