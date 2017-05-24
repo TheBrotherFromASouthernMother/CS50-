@@ -23,23 +23,22 @@ int main (int argc, string argv[]) {
     
     
     
-    for (int i = 0; i < strlen(message); i++) {
+    for (int i = 0, j = 0; i < strlen(message); i++, j++) {
         
-        char k = (keyword[i]);
+        char k = (keyword[j]);
         char crypted = 0;
         
-        if (isalpha(keyword[i])) {
-            
-            if (isupper(keyword[i])) {
-         k = (keyword[i]-65)%26 + 65;
-        
+         if(j > strlen(keyword)) {
+                j = 0;
             }
-        
-        if (islower(keyword[i])) {
             
-            k = (keyword[i] -97)%26 + 97;
-        }
         
+        
+        if (isalpha(keyword[j])) {
+        
+           
+            
+         
        
         
         if (islower(message[i]) && message[i] + k < 123 )
@@ -47,19 +46,25 @@ int main (int argc, string argv[]) {
                  crypted = message[i] + k;
                  
                  
-            } else if ( islower(message[i]))
-                {  crypted = ((message[i] - 97) + k)%26 +97;
+            } else if ( islower(message[i] ))
+               
+                {  k = tolower(keyword[j%26]) -97;
+                    
+                    crypted = ((message[i] - 97) + k)%26 +97;
                 
                 
                     
                 
                 }
-                else if (isupper(message[i]) && message[i] + k < 91) 
-                    {  crypted = message[i] + k;
+                else if (isupper(message[i]) && message[i] + k < 91) {  
+                    crypted = message[i] + k;
                         
                         }
                         else if (isupper(message[i])) 
-                            {  crypted = ((message[i] -65) + k)%26 +65;
+                         
+                            {  k = tolower(keyword[j%26])-97;
+                                
+                                crypted = ((message[i] -65) + k)%26 +65;
                             
                             
                             }
@@ -91,3 +96,4 @@ int main (int argc, string argv[]) {
     
     printf("\n"); 
     
+}
