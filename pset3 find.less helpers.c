@@ -18,9 +18,11 @@ bool search(int value, int values[], int n)
     // TODO: impl;ement a searching algorithm
     int min = 0;
     int max = n-1;
-    int guess = floor((max + min)/2); ;
+    
     
     while (max >= min) {
+        
+        int guess = floor((max + min)/2); ;
         
         if (values[guess] == value ) {
             
