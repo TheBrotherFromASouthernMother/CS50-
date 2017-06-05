@@ -29,6 +29,11 @@ int board[DIM_MAX][DIM_MAX];
 // dimensions
 int d;
 
+
+//empty tile
+int EmptyTileRow;
+int EmptyTileCol;
+
 // prototypes
 void clear(void);
 void greet(void);
@@ -158,13 +163,27 @@ void greet(void)
 void init(void)
 {
     // TODO
-    for (int i = 0, int k = 1; i < d; i ++, k ++)
+    for (int i = 0, k = 1; i < d; i ++ )
     {
-        for (int j = 0; j < d; j ++) {
+        
+        for (int j = 0; j < d; j ++, k ++) {
+           
             board[i][j] = d*d -k;
-            printf("board[%d][%d][%d]")
+           
             
         }
+    }
+    
+    //empty tile location should be set such that with "d" being the array's size, d-1 will be the locations index in the array. So for "d" == 7, then the initial empty tile location should be board[6][6]
+    
+    EmptyTileRow = d-1;
+    EmptyTileCol = d-1;
+    
+    if (d % 2 == 0) {
+        
+        int swap = board[d-1][d-2];
+        board[d-1][d-2] = board[d-1][d-3];
+        board[d-1][d-3] = swap;
     }
     
 }
@@ -175,6 +194,22 @@ void init(void)
 void draw(void)
 {
     // TODO
+    for (int i = 0; i < d; i ++)
+    {
+        for (int j = 0; j < d; j ++) {
+            
+            if (i == EmptyTileRow && j == EmptyTileCol)
+            {
+                printf(" _");
+            }
+            
+            else {
+            printf("%i ", board[i][j]);
+            }
+        }
+    printf("\n");
+    }
+
 }
 
 /**
@@ -184,6 +219,51 @@ void draw(void)
 bool move(int tile)
 {
     // TODO
+  //I'm trying to find the value of the variable "tile" within our array, using a search function. number to move is legal, I will then switch it
+    
+    int x;
+    int y;
+    
+    
+   
+   
+   for (int i = 0; i < d; i ++) 
+   {
+       
+        for (int j = 0; j < d; j ++)
+        
+        {
+            
+           if (board[i][j] == tile) {
+               
+               x = i;
+               y = j;
+               break;
+           }
+           
+        }  
+    
+   }
+    
+    
+    if (x == EmptyTileRow || y == EmptyTileCol)
+    {
+        if ( x == EmptyTileRow + 1 || x == EmptyTileRow- 1 ||
+            y == EmptyTileCol - 1 ||  y == EmptyTileCol + 1 ) {
+            
+            
+            board[EmptyTileRow][EmptyTileCol] = board[x][y]; 
+            board[x][y] = 0; 
+            
+            EmptyTileRow = x; 
+            EmptyTileCol = y; 
+            
+            return true;
+            
+        }
+   
+   
+    }
     
     return false;
 }
@@ -195,5 +275,25 @@ bool move(int tile)
 bool won(void)
 {
     // TODO
-    return false;
+    
+    if (board[d-1][d-1] != 0)
+    {
+        return false;
+    }
+    
+    int CorrectOrder = 1;
+    
+    
+    for (int i = 0; i < d; i++) {
+        
+        for (int j = 0; j < d; j++, CorrectOrder ++) {
+            
+            if (board[i][j] != CorrectOrder)
+            
+            return false;
+        }
+    }
+    
+    
+    return true;
 }
