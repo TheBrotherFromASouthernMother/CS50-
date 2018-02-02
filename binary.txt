@@ -1,0 +1,41 @@
+0000000
+
+
+
+1000011 1101000 1110010 1101001 1110011 1110100 1101001 1100001 1101110
+    C      h       r       i       s        t       i       a       n
+
+
+        1001100     1101111    1110111     1100101
+           L           o           w           e
+
+
+
+
+
+
+A bit is the basic unit of information in computer science. The Binary system
+are a base 2 numbering system where by each place value (or bit) can hold
+either 1 or 0. In this system once you have counted to 1, rather than counting again
+up to 2, you simply start the at the next place value to the left. As an example
+if we are counting to three we first count 1 which would then be led by another 1, so
+the number three would be 11 in binary.
+
+A byte is equivalent to eight place values (bits) in binary. This would be written as:
+00000000 <----- which is one byte of information.
+A byte is sometimes also referred to as an octet.
+
+In C programming differing data types require the allocation of a specific amount
+of memory in bytes.
+-A char: 1 byte
+-A bool: 1 byte, however, only one bit is actually 'filled', the rest of the bits are in
+a bool are simply fluffer for practicality sake.
+-An short int: 2 bytes
+-A long int: 4 bytes this is the more likely type of int data datype you'll see among
+modern systems.
+-A float: 4 bytes
+-A double: 8 bytes
+-A string: Is an array of chars with a binary zero (\0) as its final char, the number
+of bytes in a string depends on the number of chars in its array.
+
+data type uses a single byte of memory. A
