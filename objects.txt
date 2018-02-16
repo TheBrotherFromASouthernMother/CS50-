@@ -1,0 +1,165 @@
+Explain the difference between var foo = function() {} & function foo () {}
+-The difference between var foo and function foo is that the first is a function
+expression while the second is a function declaration. For most purposes these
+are completely the same, but with one simple difference. A function declaration is
+available to be executed the moment the DOM loads, while a function expression cannot
+be called until the point in the document that it is defined.
+
+For example:
+
+console.log(foo); //Will print undefined to the console
+
+let foo = function() {
+    return 1;
+}
+
+
+console.log(bar) //Will print 2 to the console
+
+function bar() {
+    return 2;
+}
+
+
+
+Explain the Object.prototype
+  -A good analogy for how prototypes works is this:
+  the prototype is like a delegate, it is a general representative for
+  the objects it represents
+
+  an example:
+
+  const animal = {
+  talk: function () {
+    console.log(this)
+    console.log(this.sound)
+    }
+  }
+
+  const cat = {
+    sound: 'meow'
+  }
+
+  Object.setPrototypeOf(cat, animal);
+
+  cat.talk()
+
+  In the above example, we create two object literals, 'animal' and 'cat'.
+  We added a method to the animal object 'talk' which uses 'this' and points
+  to the object's sound property. However, as the animal object does not have
+  a sound property, 'this.sound' will return undefined. The cat object, does
+  have an 'sound' property, however as it does not have the talk method attached
+  to it, calling cat.talk() will generate an error.
+
+  However, with the Object.setPrototypeOf method, we can solve this issue.
+  When we call this method with the cat being the first parameter and animal
+  being the second, we assign the prototype or 'delegate' of cat to be equal to
+  the animal object. By setting the prototype of cat to the prototype of animal,
+  the cat object now inherits all of the properties and methods of the animal object.
+  This means that the cat object will now have access to the talk method within
+  its prototype and we now call cat.talk(), and see 'meow' appear in our terminal
+
+  We can also use prototype chains as an inheritance scheme passing methods
+  and properties across multiple objects
+
+  so we could add do something like:
+
+  const siamese = {
+    sound: "Very Loud Meow"
+  };
+
+  Object.setPrototypeOf(siamese, cat);
+
+  siamese.talk() //will produce "Very Loud Meow" in the terminal window
+
+  In the above example, we create a new object "siamese" with a single property
+  'sound'. When we set the prototype of siamese to the prototype of the cat object
+  we now have the siamese object inheriting all the properties available to
+  cat. (The sound property will be set to what we defined it as in the siamese
+  object as the editor will check locally or for the 'most relevant' definition
+  of the property sound before looking into the prototype chain)
+
+
+
+Explain the difference between prototype and __proto__
+  -In theory, these properties are actually the same thing. Each Object
+  and each function have a prototype, information about how they are to
+  be implemented.
+
+  On objects, the prototype contains all the inherited
+  properties to which any given object has access. To access the
+  information stored on in an object's prototype, we use __proto__ key,
+  (i.e. obj.__proto__).
+
+  example:
+
+  const parent = {
+    name: 'Marcus',
+    age: 27,
+    occupation: dentist
+  }
+
+  const son = {
+
+  }
+
+  Object.setPrototypeOf(son, parent);
+
+  console.log(son.__proto__ ) //logs the keys and properties of the parent object's prototype
+
+  (It is important to note that while object literals possess a prototype,
+  this prototype can only be accessed with the __proto__ property and not
+  with the function.prototype key).
+
+  All JavaScript functions are actually objects
+
+
+
+Explain Function.prototype.bind
+ -The bind method is a function that sets the value or 'context' of the
+  this keyword. For an example;
+  If I call two objects canine and dog
+
+  let canine = {
+    sound: 'bark'
+  }
+
+  let dog = {
+  talk: function() {
+    return this.sound
+    }
+  }
+
+  In the instance that I call dog.talk(), the function will return undefined.
+  The reason for this is because the 'this' keyword searches first within its
+  local object 'dog' for a property named 'sound', and then for the next object
+  in its scope the 'global' object. Neither of these objects have a 'sound' property
+  as such the function dog.talk() will return the value undefined.
+
+  With the bind method, we can set the 'this' keyword to be bound to a specific object's
+  context.
+
+  So we could reference the 'sound' property on the 'canine' object by using bind like so:
+
+  dog.speak = dog.talk.bind(canine);
+
+  With this, we have a new function method 'speak' on the dog object, which
+  calls the function the function dog.talk() setting the context of 'this.sound'
+  to the sound property on the canine object.
+
+  Additionally, the bind function can also take optional arguments to be passed
+  into the prototype function's parameters.
+
+  So if dog.talk was defined
+
+  talk: function(name, animal) {
+    console.log(`${this.sound} my name is ${name} ${this.sound} and I am a(n) ${animal}`);
+  }
+
+  We would define dog.speak as
+
+  dog.speak = dog.talk.bind(canine, 'Max', 'German Shepherd');
+
+
+
+-Explain the use of call and apply and how they differ
