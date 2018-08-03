@@ -17,16 +17,15 @@ LinkedList.prototype.add = function(val){
     // If there are no nodes in the linked list, set the given value as the list's head
     if(!this.head){
       this.head = node;
-    }
-    else {
-      //Starting from the head of the list finds the end of the list and places the current node at it
+    } else {
+      //Starting from the head of the list find the end of the list and places the current node at it
       current = this.head;
       while(current.next !== null){
         current = current.next;
       }
       current.next = node;
     }
-    this.length ++;
+    return this.length ++;
   }
 
 LinkedList.prototype.remove = function(val) {
@@ -38,12 +37,10 @@ LinkedList.prototype.remove = function(val) {
   }
 
   previousNode = currentNode;
-  while(currentNode.next) {
+  while(currentNode) {
     if (currentNode.value == val) {
-      console.log("breara")
       this.length --;
       return previousNode.next = currentNode.next;
-
     }
     previousNode = currentNode;
     currentNode = currentNode.next;
@@ -60,14 +57,16 @@ LinkedList.prototype.remove = function(val) {
 
 const list = new LinkedList();
 
-list.add(1)
-list.add(2)
-// list.add(3)
+list.add(1);
+list.add(2);
+list.add(3);
+// list.add(5);
+// list.add(6);
 
 console.log(list.head)
 console.log(list.head.next)
 console.log(list.length)
 
-list.remove(5);
+list.remove(1);
 
-console.log(list)
+console.dir(list)
