@@ -31,26 +31,30 @@ LinkedList.prototype.add = function(val){
 
 LinkedList.prototype.remove = function(val) {
   let currentNode = this.head;
-  if (!currentNode) {
-    return -1;
+  let previousNode;
+  if (currentNode.value === val) {
+    this.length --;
+    return this.head = currentNode.next;
   }
 
+  previousNode = currentNode;
   while(currentNode.next) {
     if (currentNode.value == val) {
       console.log("breara")
-      previousNode.next = currentNode.next;
       this.length --;
-      break;
+      return previousNode.next = currentNode.next;
+
     }
     previousNode = currentNode;
     currentNode = currentNode.next;
   }
 
-  if (currentNode.val == val) {
-    previousNode.next = currentNode.next;
+  if (currentNode.value == val) {
+    this.length --;
+    return previousNode.next = currentNode.next;
   }
 
-  return this.length;
+  return -1;
 
 }
 
@@ -64,6 +68,6 @@ console.log(list.head)
 console.log(list.head.next)
 console.log(list.length)
 
-list.remove(2);
+list.remove(5);
 
 console.log(list)
